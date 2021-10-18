@@ -53,10 +53,11 @@ const handleRequest = function(req, res) {
       data += chunk;
     })
     req.on('end', () => {
-      var newQuote = JSON.parse(data).quote;
-      console.log(newQuote);
-      quotes.push(newQuote);
-      res.end();
+      console.log(data);
+      quotes.push(data);
+      res.writeHead(201, headers);
+      res.end('SUCCESS!');
+      console.log(quotes);
     })
   }
 
