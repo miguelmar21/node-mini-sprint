@@ -11,7 +11,7 @@ $(document).ready(function() {
   });
 
   function getQuote(){
-    var url = 'http://localhost:8080/quote';
+    var url = 'http://localhost:8000/quote';
     $.ajax({
       url: url,
       type: "GET",
@@ -29,7 +29,7 @@ $(document).ready(function() {
   }
 
   function addQuote(quote){
-    var url = 'http://localhost:8080/quote';
+    var url = 'http://localhost:8000/quote';
     $.ajax({
       url: url,
       type: "POST",
