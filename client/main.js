@@ -34,6 +34,7 @@ $(document).ready(function() {
       url: url,
       type: "POST",
       data: quote,
+      contentType: 'text/plain',
       success: function(results){
         console.log('Your beautiful quote: "' + quote + '" is now added to our database')
       },
