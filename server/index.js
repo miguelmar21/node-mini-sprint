@@ -41,7 +41,7 @@ const handleRequest = function(req, res) {
     //YOUR CODE HERE
     console.log('Getting you a random quote...')
     res.writeHead(200, headers);
-    var randomQuote = quotes[getRandomInt(0,5)];
+    var randomQuote = quotes[getRandomInt(0,quotes.length)];
     res.end(JSON.stringify(randomQuote));
   }
   // TODO: POST/CREATE

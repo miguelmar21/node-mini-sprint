@@ -34,9 +34,8 @@ $(document).ready(function() {
       url: url,
       type: "POST",
       data: quote,
-      success: function(data, result){
-        console.log(result);
-        console.log('SUCCESS FROM AJAX SIDE,' + data)
+      success: function(results){
+        console.log('Your beautiful quote: "' + quote + '" is now added to our database')
       },
       error: function(error) {
         console.log(`Erorr: ${error}`);
