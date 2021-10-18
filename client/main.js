@@ -17,7 +17,7 @@ $(document).ready(function() {
   }
 
   function addQuote(quote){
-    
+
     //YOUR CODE HERE, Add a POST request
 
   }

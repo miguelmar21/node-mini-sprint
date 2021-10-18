@@ -4,19 +4,19 @@ const http = require('http');
 const headers = {
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "access-control-allow-headers": "content-type, accept",
+  "access-control-allow-headers": "content-type, accept, application/json",
   "access-control-max-age": 10
 };
 
-const port = 3000;
+const port = 8080;
 
 // TODO: Fill with strings of your favorite quotes :)
 const quotes = [
-  'one',
-  'two',
-  'three',
-  'four',
-  'five'
+  'So it goes...',
+  'We are here on this earth to love and be loved',
+  'Its just a bad day, not a bad life',
+  'The sun never sets on your dreams',
+  'Everything worth doing is hard'
 ];
 
 //Utility Function to return a random integer
@@ -37,13 +37,27 @@ const handleRequest = function(req, res) {
   }
 
   // TODO: GET ONE
-  if ((req.url == '/quote/' || req.url == '/quote') && req.method == "FILL ME IN") {
+  if ((req.url == '/quote/' || req.url == '/quote') && req.method == "GET") {
     //YOUR CODE HERE
-
+    console.log('Getting you a random quote...')
+    res.writeHead(200, headers);
+    var randomQuote = quotes[getRandomInt(0,5)];
+    res.end(JSON.stringify(randomQuote));
   }
   // TODO: POST/CREATE
-  else if ((req.url == 'FILL ME IN' || req.url == 'FILL ME IN') && req.method == "FILL ME IN") {
+  else if ((req.url == '/quote/' || req.url == '/quote') && req.method == "POST") {
     //YOUR CODE HERE
+    console.log('Adding your beautiful quote...');
+    var data = '';
+    req.on('data', chunk => {
+      data += chunk;
+    })
+    req.on('end', () => {
+      var newQuote = JSON.parse(data).quote;
+      console.log(newQuote);
+      quotes.push(newQuote);
+      res.end();
+    })
   }
 
 //CATCH ALL ROUTE
