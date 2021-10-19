@@ -1,22 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const model = require('../server/db/index.js');
 const app = express();
 const port = 8000;
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.text());
 
-// TODO: Fill with strings of your favorite quotes :)
-const quotes = [
-  'So it goes...',
-  'We are here on this earth to love and be loved',
-  'Its just a bad day, not a bad life',
-  'The sun never sets on your dreams',
-  'Everything worth doing is hard'
-];
+app.use(cors());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// app.use(express.text());
 
 //Utility Function to return a random integer
 function getRandomInt(min, max) {
@@ -32,13 +25,24 @@ app.get('/', function(req, res) {
 })
 
 app.get('/quote', function(req, res) {
-  res.status(200).send(quotes[getRandomInt(0, quotes.length)]);
+  model.getAll((err, data) => {
+    if (err) {
+      res.status(404).send('Sorry bud, no quotes for you');
+    } else {
+      res.status(200).send(data);
+    }
+  })
 })
 
 app.post('/quote', function(req, res) {
-  console.log(req.body);
-  quotes.push(req.body);
-  res.status(201).send('Nice quote!');
+  console.log(req.body.quote);
+  model.postQuote(req.body.quote, (err, data) => {
+    if (err) {
+      res.status(500).send('Sorry, couldnt get your quote');
+    } else {
+      res.status(201).send('Got it!');
+    }
+  })
 })
 
 app.listen(port, () => {
