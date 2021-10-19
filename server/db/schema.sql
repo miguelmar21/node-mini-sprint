@@ -1,3 +1,5 @@
+DROP DATABASE quoteApp;
+
 CREATE DATABASE quoteApp;
 
 USE quoteApp;

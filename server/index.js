@@ -35,8 +35,8 @@ app.get('/quote', function(req, res) {
 })
 
 app.post('/quote', function(req, res) {
-  console.log(req.body.quote);
-  model.postQuote(req.body.quote, (err, data) => {
+  console.log(req.body.Quote);
+  model.postQuote(req.body.Quote, (err, data) => {
     if (err) {
       res.status(500).send('Sorry, couldnt get your quote');
     } else {
