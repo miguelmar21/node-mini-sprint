@@ -5,7 +5,7 @@ function QuotesRenderer(props) {
     <ul>
       {props.quotes.map((quote, index) => {
         return (
-          <li key={index}>{quote}</li>
+          <li key={index} onClick={props.handleUpdate} value={quote}>{quote}</li>
         )
       })}
     </ul>

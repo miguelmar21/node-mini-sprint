@@ -37,7 +37,33 @@ var postQuote = function(quote, callback) {
   })
 }
 
+var deleteQuote = function(callback) {
+  var queryString = 'DELETE FROM quotes';
+  db.query(queryString, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result)
+    }
+  })
+}
+
+var updateQuote = function(params, callback) {
+  console.log(params)
+  var queryString =
+  'UPDATE quotes SET Quote = ? WHERE Quote = ?'
+  db.query(queryString, params, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  })
+}
+
 module.exports = {
   getAll,
-  postQuote
+  postQuote,
+  deleteQuote,
+  updateQuote
 }

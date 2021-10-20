@@ -45,6 +45,28 @@ app.post('/quote', function(req, res) {
   })
 })
 
+app.delete('/quote', function(req, res) {
+  model.deleteQuote((err, result) => {
+    if (err) {
+      res.status(500).send('Sorry, couldnt delete');
+    } else {
+      res.status(200).send('Deleted!')
+    }
+  })
+})
+
+app.put('/quote', function(req, res) {
+  var params = [req.body.newQuote, req.body.oldQuote];
+  console.log(params);
+  model.updateQuote(params, (err, result) => {
+    if (err) {
+      res.status(500).send('alv no good');
+    } else {
+      res.status(200).send('alv its good!')
+    }
+  })
+})
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
